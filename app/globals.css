@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Numera Dark Theme — Navy/Indigo Enterprise */
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 5%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 6%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 28% 14%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 223 47% 10%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 215 28% 14%;
+    --accent-foreground: 213 31% 91%;
+
+    --destructive: 0 63% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 34% 15%;
+    --input: 215 34% 15%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+
+  /* Smooth focus outline */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Text gradient utilities */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-violet-400 bg-clip-text text-transparent;
+  }
+
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-md border border-white/5;
+  }
+
+  /* Matrix cell shimmer for loading */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Matrix grid — always-visible, styled scrollbars on both axes */
+  .matrix-scroll {
+    overflow: auto;
+    scrollbar-gutter: stable;
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.35) hsl(var(--muted) / 0.6);
+  }
+
+  .matrix-scroll::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .matrix-scroll::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.6);
+    border-radius: 0;
+  }
+
+  .matrix-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.35);
+    border-radius: 5px;
+    border: 2px solid hsl(var(--muted) / 0.6);
+  }
+
+  .matrix-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+
+  .matrix-scroll::-webkit-scrollbar-corner {
+    background: hsl(var(--muted) / 0.6);
+  }
+}
